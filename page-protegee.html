@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page protégée</title>
+</head>
+<body style="font-family: Arial; padding: 2rem;">
+  <h1>Bienvenue, vous êtes connecté ✅</h1>
+  <button onclick="logout()">Se déconnecter</button>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCS43JC62yrDK4qAqTYnV1htGLWNm2uIE8",
+      authDomain: "authentification-associa-f12ff.firebaseapp.com",
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+
+    function logout() {
+      auth.signOut().then(() => window.location.href = "index.html");
+    }
+  </script>
+</body>
+</html>
